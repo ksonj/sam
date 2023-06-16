@@ -1,7 +1,7 @@
 final: prev: {
   sam = prev.stdenv.mkDerivation {
     pname = "sam";
-    version = "2023-11-21-r3";
+    version = "2022-11-21-r3";
     nativeBuildInputs = [final.autoPatchelfHook final.makeWrapper];
     buildInputs = with final; [
       libsecret
