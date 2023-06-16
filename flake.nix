@@ -39,7 +39,7 @@
             mkdir -p $out/bin
             mkdir -p $out/build
             echo "$out/build" | ./$name.run
-            cp $out/build/SAM $out/bin/
+            cp $out/build/SAM $out/bin/sam
           '';
         };
     in {
