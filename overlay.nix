@@ -1,8 +1,17 @@
-final: prev: {
+final: prev: let
+  src = {
+    url = "https://sam.nrel.gov/download/80-sam-2025-4-16-for-linux/file.html";
+    sha256 = "sha256-YkbateULhCgpso3nBYGoNLbQXrQ3j7PcedO/LXn/HMw=";
+  };
+in {
   sam = prev.stdenv.mkDerivation {
     pname = "sam";
-    version = "2022-11-21-r3";
-    nativeBuildInputs = [final.autoPatchelfHook final.makeWrapper];
+    version = "2025-04-16";
+    nativeBuildInputs = [
+      final.autoPatchelfHook
+      final.makeWrapper
+    ];
+    autoPatchelfIgnoreMissingDeps = ["libgfortran.so.3"];
     buildInputs = with final; [
       libsecret
       curl
@@ -10,12 +19,10 @@ final: prev: {
       xorg.libXxf86vm
       xorg.libXtst
       xorg.libSM
-      gfortran6.cc.lib
+      libgcc
+      #gfortran.cc.lib
     ];
-    src = prev.fetchurl {
-      url = "https://sam.nrel.gov/download/71-sam-2022-11-21-for-linux/file.html";
-      sha256 = "22235de1243d56f6295380b1f622de3160f39912c14848aa5e4f364ce01674c6";
-    };
+    src = prev.fetchurl src;
     unpackPhase = ''
       cp $src $name.run
       chmod +x $name.run
